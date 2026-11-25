@@ -1,0 +1,26 @@
+# Python
+.venv/
+venv/
+**/__pycache__/
+*.pyc
+*.pyo
+.pytest_cache/
+
+# SQLite database (created automatically by the backend)
+*.db
+*.db-journal
+*.db-wal
+*.db-shm
+
+# Frontend
+node_modules/
+dist/
+.vite/
+
+# Local environment files
+.env
+.env.*
+!.env.example
+
+# Vercel
+.vercel/
