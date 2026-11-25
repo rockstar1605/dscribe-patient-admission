@@ -2,7 +2,6 @@
 
 import logging
 import os
-import sqlite3
 from typing import Annotated
 
 from fastapi import FastAPI, HTTPException, Path, Request
@@ -76,14 +75,17 @@ def handle_validation_error(request: Request, exc: RequestValidationError):
     )
 
 
-@app.exception_handler(sqlite3.Error)
-def handle_database_error(request: Request, exc: sqlite3.Error):
-    """Log the real error on the server, but send only a general message."""
+def handle_database_error(request: Request, exc: Exception):
+    """Log the real database error on the server, but send only a general message."""
     logger.error("Database error: %s", exc)
     return JSONResponse(
         status_code=500,
         content={"detail": "A database error occurred. Please try again."},
     )
+
+
+for db_error in database.DB_ERRORS:
+    app.add_exception_handler(db_error, handle_database_error)
 
 
 def get_patient_or_404(patient_id):
