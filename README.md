@@ -43,65 +43,9 @@ dscribe-patient-admission/
 │           ├── Filters.jsx       Search box and filter dropdowns
 │           ├── PatientForm.jsx   Form used for both add and edit
 │           └── PatientTable.jsx  Patient list and row actions
-├── screenshots/
-├── .env.example
 ├── vercel.json
 └── README.md
 ```
-
-## Prerequisites
-
-- Python 3.11 or newer
-- Node.js 20.19+ or 22.12+ (for the Vite tool)
-
-## Steps to run
-
-The commands below are for Windows PowerShell. On macOS/Linux use `python3` instead of `py`, and `.venv/bin/python` instead of `.venv\Scripts\python`.
-
-### 1. Backend (first terminal)
-
-Install, once:
-
-```powershell
-cd backend
-py -m venv .venv
-.venv\Scripts\python -m pip install -r requirements.txt
-```
-
-Start, from the `backend` folder:
-
-```powershell
-.venv\Scripts\python -m uvicorn main:app --reload
-```
-
-The API runs at http://127.0.0.1:8000 and interactive API documentation is at http://127.0.0.1:8000/docs.
-
-### 2. Frontend (second terminal)
-
-Install, once:
-
-```powershell
-cd frontend
-npm install
-```
-
-Start, from the `frontend` folder:
-
-```powershell
-npm run dev
-```
-
-Open http://localhost:5173 in a browser.
-
-### Optional settings
-
-No settings are needed to run locally. These environment variables can change the defaults:
-
-| Variable | Used by | Default |
-|---|---|---|
-| `DATABASE_PATH` | Backend | `backend/patients.db` |
-| `ALLOWED_ORIGINS` | Backend (CORS, comma separated) | `http://localhost:5173,http://127.0.0.1:5173` |
-| `VITE_API_URL` | Frontend (read when Vite starts or builds) | `http://127.0.0.1:8000` |
 
 ## Implemented features
 
@@ -171,7 +115,7 @@ Status is not typed in by the user. It starts as Admitted and is changed only by
 
 ## Database
 
-SQLite stores everything in one file, `backend/patients.db`. The file and its single `patients` table are created automatically when the backend starts. Because it is a file on disk, data stays saved after a server restart. The file is not committed to Git.
+Locally, SQLite stores everything in one file, `backend/patients.db`. The file and its single `patients` table are created automatically when the backend starts. Because it is a file on disk, data stays saved after a server restart. The file is not committed to Git.
 
 | Column | Type | Constraint |
 |---|---|---|
@@ -201,22 +145,3 @@ Example, adding a patient:
 4. `database.py` inserts the row into SQLite.
 5. FastAPI returns the new record as JSON with status 201.
 6. React shows a success message and loads the list again with `GET /patients`.
-
-## Screenshots
-
-### Patient list
-![Patient list](screenshots/patient-list.png)
-
-### Form validation
-![Form validation](screenshots/form-validation.png)
-
-### Edit patient
-![Edit patient](screenshots/edit-patient.png)
-
-### Tablet
-![Tablet](screenshots/list-tablet.png)
-
-### Mobile
-| List | Form |
-|---|---|
-| ![Mobile list](screenshots/list-mobile.png) | ![Mobile form](screenshots/form-mobile.png) |

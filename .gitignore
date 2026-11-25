@@ -4,7 +4,6 @@ venv/
 **/__pycache__/
 *.pyc
 *.pyo
-.pytest_cache/
 
 # SQLite database (created automatically by the backend)
 *.db
@@ -20,7 +19,6 @@ dist/
 # Local environment files
 .env
 .env.*
-!.env.example
 
 # Vercel
 .vercel/

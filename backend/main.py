@@ -18,10 +18,6 @@ logger = logging.getLogger("uvicorn.error")
 
 # Frontend addresses that may call this API (comma separated).
 DEFAULT_ORIGINS = "http://localhost:5173,http://127.0.0.1:5173"
-for vercel_env in ("VERCEL_URL", "VERCEL_PROJECT_PRODUCTION_URL"):
-    vercel_host = os.getenv(vercel_env)
-    if vercel_host:
-        DEFAULT_ORIGINS += f",https://{vercel_host}"
 ALLOWED_ORIGINS = [
     origin.strip()
     for origin in os.getenv("ALLOWED_ORIGINS", DEFAULT_ORIGINS).split(",")

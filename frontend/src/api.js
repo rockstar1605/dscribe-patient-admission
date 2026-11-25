@@ -6,7 +6,6 @@ const API_URL = (import.meta.env.VITE_API_URL || DEFAULT_API_URL).replace(/\/$/,
 // Sends a request and returns the JSON response.
 // On failure it throws an Error with:
 //   error.message     - text to show the user
-//   error.status      - HTTP status code (undefined if the server was unreachable)
 //   error.fieldErrors - validation errors from the backend, e.g. { age: '...' }
 async function sendRequest(path, options = {}) {
   let response
@@ -21,7 +20,6 @@ async function sendRequest(path, options = {}) {
 
   if (!response.ok) {
     const error = new Error(data?.detail || `Request failed (status ${response.status}).`)
-    error.status = response.status
     error.fieldErrors = data?.errors || {}
     throw error
   }
